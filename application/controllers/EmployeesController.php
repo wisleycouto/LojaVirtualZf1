@@ -2,7 +2,7 @@
 
 class EmployeesController extends Zend_Controller_Action {
 
-    /**
+    /** 
      * @var Zend_Log
      */
     private $logger;

@@ -1,5 +1,6 @@
 <?php
-
+//Define BASE_URL
+ defined('BASE_URL') || define('BASE_URL', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/public/index.php')));
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
