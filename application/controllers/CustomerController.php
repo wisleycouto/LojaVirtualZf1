@@ -17,7 +17,7 @@ class CustomerController extends Zend_Controller_Action {
     }
 
     public function createAction() {
-        var_dump('oi');die;
+        var_dump('oi');die; 
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/forms/customer.ini', 'create');
         $this->view->form = new Application_Form_Customer($config);
     }
