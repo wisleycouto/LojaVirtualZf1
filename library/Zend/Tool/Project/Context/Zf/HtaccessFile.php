@@ -42,7 +42,7 @@ class Zend_Tool_Project_Context_Zf_HtaccessFile extends Zend_Tool_Project_Contex
     /**
      * @var string
      */
-    protected $_filesystemName = '.htaccess';
+    protected $_filesystemName = '_.htaccess';
 
     /**
      * getName()

@@ -1,9 +1,16 @@
 <?php
+
+date_default_timezone_set('America/Sao_Paulo');
+
 //Define BASE_URL
- defined('BASE_URL') || define('BASE_URL', substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/public/index.php')));
+ defined('BASE_URL') || define('BASE_URL','/public/index.php');
+
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+
+//Define BASE_PATH
+defined('BASE_PATH') || define('BASE_PATH', str_replace('/index.php','',BASE_URL));
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -23,5 +30,6 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
+
 $application->bootstrap()
             ->run();
