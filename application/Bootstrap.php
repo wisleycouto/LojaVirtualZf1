@@ -24,10 +24,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->doctype('HTML4_STRICT');
         //meta tag
         $view->headMeta()->appendHttpEquiv('Content-Type', 'Text/html; charset=UTF-8');
-        //favicon
-        //$view->headLink()->headLink(array('rel' => 'shortcut icon', 'href' => $view->baseUrl('/img/animated_favicon_creadf.gif'), 'type' => 'image/x-icon', 'PREPEND'));
         //Vars Definitions
         $view->basePath = BASE_PATH;// caminho da pasta 'public'
+        $view->baseUrl = BASE_URL;//base url da aplicação
     }
 
     protected function _initAutoload() {

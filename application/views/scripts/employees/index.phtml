@@ -1,4 +1,44 @@
 <br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Employees</b> and script/action name <b>index</b></p>
+	<p style="margin: 0px auto;text-align: center;font-size: 20px;padding: 15px;">Lista de <b>Employees</b> </p>
+
+    <table style="width: 100%; border:1px solid FFF;">
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Celular</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Rua</th>
+            <th>Nº</th>
+            <th>Bairro</th>
+            <th>CEP</th>
+            <th>Cidade</th>
+            <th>Ações</th>
+        </tr>
+        <?php
+        //Lista all elements
+        if(count($this->lista)>0){
+            foreach($this->lista as $item){
+                echo '<tr>';
+                    echo '<td>'.$item->name.'</td>';
+                    echo '<td>'.$item->phone.'</td>';
+                    echo '<td>'.$item->cellphone.'</td>';
+                    echo '<td>'.$item->cpf.'</td>';
+                    echo '<td>'.$item->email.'</td>';
+                    echo '<td>'.$item->street.'</td>';
+                    echo '<td>'.$item->house_number.'</td>';
+                    echo '<td>'.$item->neighborhood.'</td>';
+                    echo '<td>'.$item->cep.'</td>';
+                    echo '<td>'.$item->city.'</td>';
+                    echo '<td>'.$item->city.'</td>';
+                    echo '<td><a href="'.$this->baseUrl.'/employees/edit/id/'.$item->id.'" class="btn btn-success">Editar</a><br>
+                              <a href="'.$this->baseUrl.'/employees/delete/id/'.$item->id.'" class="btn btn-danger">Excluir</a><br></td>';
+                echo '</tr>';
+            }
+        }else{
+            echo '<td colspan=11>Nenhum registro encontrado!</td>';
+        }//if
+    ?>
+    </table>
 </div>
