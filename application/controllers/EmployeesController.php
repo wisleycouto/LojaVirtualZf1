@@ -52,9 +52,59 @@ class EmployeesController extends Zend_Controller_Action {
     public function editAction()
     {
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/forms/employees.ini', 'edit');
-        $this->view->form = new Application_Form_Employees($config);
-    }
+        $form = new Application_Form_Employees($config);
 
+        //Verificando o "id" do employee e caso nao exista ou seja nulo redireciona para tela inicial do employees.
+        $idEmployee = $this->_request->getParam('id');
+
+        if(empty($idEmployee) || $idEmployee==null){
+            $this->redirect('/employees');
+        }//if id employees
+
+        //Recupera os dados do registro.
+        $dadosEmployee = $this->_modelEmployees->find($idEmployee)->current();
+
+        //Verifica se os registros existem e se retornar nulo redireciona para a tela inidial do employee
+        if($dadosEmployee==null){
+            $this->redirect('/employees');
+        }else{
+            //Faz os tratamentos para realizar o update
+            $arrayDados = $this->_modelEmployees->_convertDBArr($dadosEmployee);
+
+            //Update elements in DB
+            if($this->_request->isPost()){
+                $valida=$this->validateData($this->_request,'edit');
+                if(is_bool($valida) & $valida==true) {
+                    $this->redirect('/employees');
+                }else{
+                    $form->populate($this->_request->getParams());
+                    $this->view->error=$this->_exception;
+                }
+            }//if post form
+        }//if / else dadosRegistro employee
+        $this->view->form=$form;
+    }//update
+
+
+    //Remove Register
+    public function deleteAction()
+    {
+        //Verificando o "id" do employee e caso nao exista ou seja nulo redireciona para tela inicial do employees.
+        $idEmployee = $this->_request->getParam('id');
+
+        if(empty($idEmployee) || $idEmployee==null){
+            $this->redirect('/employees');
+        }//if id employees
+
+        //Recupera os dados do registro.
+        $dadosEmployee = $this->_modelEmployees->find($idEmployee)->current();
+
+        //Verifica se os registros existem e se retornar nulo redireciona para a tela inidial do employee
+        if($dadosEmployee!=null) {
+            $this->_modelEmployees->remove($dadosEmployee->id);
+        }
+        $this->redirect('/employees');
+    }//delete
 
     //Validate Data
     private function validateData(Zend_Controller_Request_Http $request, $typeForm=null)
@@ -85,7 +135,7 @@ class EmployeesController extends Zend_Controller_Action {
             return $cepValidate;
         }//if validate CEP
 
-
+        //Update Register
         if(strtolower($typeForm)=='edit'){
             //Validate id to update
             if(!$digitValidate->isValid($request->id)){

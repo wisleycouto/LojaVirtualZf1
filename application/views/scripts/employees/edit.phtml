@@ -1,1 +1,8 @@
-<?php echo $this->form ?>
+<?php
+    if($this->error)
+        echo '<div class="alert alert-danger"><ul><li>'.$this->error.'</li></ul></div><br><br>';
+
+    echo $this->form;
+
+
+
